@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Homework</string>
+    <string name="button0">0\n+</string>
+    <string name="button1">1\nDIAL</string>
+    <string name="button2">2\nABC</string>
+    <string name="button3">3\nDEF</string>
+    <string name="button4">4\nGHI</string>
+    <string name="button5">5\nJKL</string>
+    <string name="button6">6\nMNO</string>
+    <string name="button7">7\nPQRS</string>
+    <string name="button8">8\nTUV</string>
+    <string name="button9">9\nWXYZ</string>
+    <string name="buttonAst">*</string>
+    <string name="buttonCard">#</string>
+    <string name="number"></string>
+    <string name="c1">key1</string>
+    <string name="c2">key2</string>
+    <string name="c3">key3</string>
+    <string name="file" />
+</resources>

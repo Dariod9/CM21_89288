@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">InClassDemo</string>
+    <string name="helloworld">\"Hello Worlds\"</string>
+    <string name="nome">\"Dário\"</string>
+</resources>
