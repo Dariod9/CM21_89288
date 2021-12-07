@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     fun listenNumbers(intent: Intent) {
         val textBox=findViewById(R.id.textView) as TextView
 
+        val nomeT= findViewById(R.id.textView2) as TextView
         val buttonDel = findViewById(R.id.buttonDel) as Button
 
         buttonDel.setOnClickListener {
@@ -64,6 +65,8 @@ class MainActivity : AppCompatActivity() {
         button0.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "0")
             textBox.text=textBox.text.toString()+"0";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -78,6 +81,8 @@ class MainActivity : AppCompatActivity() {
         button1.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "1")
             textBox.text=textBox.text.toString()+"1";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -93,6 +98,8 @@ class MainActivity : AppCompatActivity() {
         button2.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "2")
             textBox.text=textBox.text.toString()+"2";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -108,6 +115,8 @@ class MainActivity : AppCompatActivity() {
         button3.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "3")
             textBox.text=textBox.text.toString()+"3";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -124,6 +133,8 @@ class MainActivity : AppCompatActivity() {
         button4.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "4")
             textBox.text=textBox.text.toString()+"4";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -133,6 +144,8 @@ class MainActivity : AppCompatActivity() {
         button5.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "5")
             textBox.text=textBox.text.toString()+"5";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -142,6 +155,8 @@ class MainActivity : AppCompatActivity() {
         button6.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "6")
             textBox.text=textBox.text.toString()+"6";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -151,6 +166,8 @@ class MainActivity : AppCompatActivity() {
         button7.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "7")
             textBox.text=textBox.text.toString()+"7";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -160,6 +177,8 @@ class MainActivity : AppCompatActivity() {
         button8.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "8")
             textBox.text=textBox.text.toString()+"8";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -169,6 +188,8 @@ class MainActivity : AppCompatActivity() {
         button9.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "9")
             textBox.text=textBox.text.toString()+"9";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -178,6 +199,8 @@ class MainActivity : AppCompatActivity() {
         buttonAst.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "*")
             textBox.text=textBox.text.toString()+"*";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -187,6 +210,8 @@ class MainActivity : AppCompatActivity() {
         buttonCard.setOnClickListener {
             Log.println(Log.DEBUG, "DEBUG", "#")
             textBox.text=textBox.text.toString()+"#";
+            nomeT.text=""
+
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
         }
@@ -212,6 +237,8 @@ class MainActivity : AppCompatActivity() {
                 var param= contacto!!.split(",")
                 if(param[0]!= null && param[1]!=null) {
                     textBox.text=param[1];
+                    nomeT.text="("+param[0]+")"
+
                 }
             }
             // your code to perform when the user clicks on the button
@@ -229,6 +256,8 @@ class MainActivity : AppCompatActivity() {
                 var param= contacto!!.split(",")
                 if(param[0]!= null && param[1]!=null) {
                     textBox.text=param[1];
+                    nomeT.text="("+param[0]+")"
+
                 }
             }
             // your code to perform when the user clicks on the button
@@ -246,6 +275,8 @@ class MainActivity : AppCompatActivity() {
                 var param= contacto!!.split(",")
                 if(param[0]!= null && param[1]!=null) {
                     textBox.text=param[1];
+                    nomeT.text="("+param[0]+")"
+
                 }
             }
             // your code to perform when the user clicks on the button

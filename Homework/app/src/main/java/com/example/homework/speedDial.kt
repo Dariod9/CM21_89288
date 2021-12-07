@@ -92,6 +92,7 @@ class speedDial : AppCompatActivity() {
             }
             // your code to perform when the user clicks on the button
 //            Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
 
