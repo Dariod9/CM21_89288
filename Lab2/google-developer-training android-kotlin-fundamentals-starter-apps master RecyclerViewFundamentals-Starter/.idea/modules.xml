@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/google-developer-training_android-kotlin-fundamentals-starter-apps_master_RecyclerViewFundamentals-Starter.iml" filepath="$PROJECT_DIR$/.idea/modules/google-developer-training_android-kotlin-fundamentals-starter-apps_master_RecyclerViewFundamentals-Starter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/google-developer-training_android-kotlin-fundamentals-starter-apps_master_RecyclerViewFundamentals-Starter.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/google-developer-training_android-kotlin-fundamentals-starter-apps_master_RecyclerViewFundamentals-Starter.app.iml" />
+    </modules>
+  </component>
+</project>
