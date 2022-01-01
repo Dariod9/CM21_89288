@@ -16,17 +16,26 @@
 
 package com.example.android.stalktracker
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.android.stalktracker.databinding.ActivityMainBinding
+import com.firebase.ui.auth.AuthUI
+import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
+    lateinit var auth : FirebaseAuth
+    lateinit var navigationView: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         drawerLayout=binding.drawerLayout
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
-
+        navigationView=findViewById(R.id.navView)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -48,13 +57,27 @@ class MainActivity : AppCompatActivity() {
          supportActionBar?.title =title
     }
 
-    // TODO (01) Create the new TitleFragment
-    // Select File->New->Fragment->Fragment (Blank)
+    fun changeNav(){
+        navigationView.menu.clear()
+        navigationView.inflateMenu(R.menu.navdrawer_menu_logged)
+//        val appBarConfiguration = AppBarConfiguration(setOf(R.id.firstFragment, R.id.secondFragment))
+//        NavigationUI.navigateUp(navController, drawerLayout)
+    }
 
-    // TODO (02) Clean up the new TitleFragment
-    // In our new TitleFragment
+//    fun checkLogged() {
+//        auth = Firebase.auth
+//        if (auth.currentUser == null) {
+//            // Not signed in, launch the Sign In activity
+//            startActivity(Intent(this, SignInActivity::class.java))
+//            finish()
+//            return
+//        }
+//    }
 
-    // TODO (03) Use DataBindingUtil.inflate to inflate and return the titleFragment in onCreateView
-    // In our new TitleFragment
-    // R.layout.fragment_title
+//    fun signOut() {
+//        AuthUI.getInstance().signOut(this)
+//        startActivity(Intent(this, SignInActivity::class.java))
+//        finish()
+//    }
+
 }

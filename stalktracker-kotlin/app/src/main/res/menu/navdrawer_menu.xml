@@ -13,6 +13,7 @@
     <item
         android:id="@+id/ContactFragment"
         android:icon="@android:drawable/stat_sys_phone_call"
-        android:title="@string/contactUs" />
+        android:title="@string/contactUs"
+        android:visible="false"/>
 
 </menu>
