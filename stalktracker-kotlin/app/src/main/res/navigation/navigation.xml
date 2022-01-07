@@ -62,11 +62,7 @@
         android:id="@+id/loginFragment"
         android:name="com.example.android.stalktracker.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login" >
-        <action
-            android:id="@+id/action_loginFragment_to_afterLoginFragment"
-            app:destination="@id/afterLoginFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_login" />
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.example.android.stalktracker.AboutFragment"
@@ -82,11 +78,5 @@
         android:name="com.example.android.stalktracker.SignUpFragment"
         android:label="SignUpFragment"
         tools:layout="@layout/fragment_signup"
-        />
-    <fragment
-        android:id="@+id/afterLoginFragment"
-        android:name="com.example.android.stalktracker.AfterLoginFragment"
-        android:label="AfterLoginFragment"
-        tools:layout="@layout/fragment_afterlogin"
         />
 </navigation>

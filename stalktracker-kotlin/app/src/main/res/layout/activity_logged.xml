@@ -27,12 +27,12 @@
             android:orientation="vertical">
 
             <fragment
-                android:id="@+id/myNavHostFragment"
+                android:id="@+id/myNavHostFragmentLogged"
                 android:name="androidx.navigation.fragment.NavHostFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
-                app:navGraph="@navigation/navigation"
+                app:navGraph="@navigation/navigation_logged"
                 app:defaultNavHost="true"
                 />
             <!-- TODO (04) Add a fragment tag for the titleFragment in the LinearLayout
