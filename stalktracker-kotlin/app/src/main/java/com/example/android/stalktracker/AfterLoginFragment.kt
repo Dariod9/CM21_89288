@@ -16,8 +16,10 @@
 
 package com.example.android.stalktracker
 
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.IntentFilter
 import android.os.Bundle
@@ -35,26 +37,25 @@ import android.content.Intent
 import android.content.BroadcastReceiver
 
 import android.location.LocationManager
+import android.os.Parcelable
 import android.provider.Settings
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.app.ActivityCompat.startActivityForResult
 
 import androidx.core.content.ContextCompat.getSystemService
-
-
-
-
-
-
-
+import androidx.core.content.getSystemService
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.firebase.ui.auth.AuthUI.getApplicationContext
 
 class AfterLoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
-    private var m_bluetoothAdapter: BluetoothAdapter? = null
+    private val adapter = DeviceAdapter()
+//    private var m_bluetoothAdapter: BluetoothAdapter? = null
     private lateinit var m_pairedDevices: Set<BluetoothDevice>
-    private var m_devices: ArrayList<BluetoothDevice> = ArrayList()
+    private var m_devices: ArrayList<Device> = ArrayList()
 
     companion object {
         val EXTRA_ADDRESS: String = "Device_address"
@@ -71,27 +72,31 @@ class AfterLoginFragment : Fragment() {
             inflater, R.layout.fragment_afterlogin, container, false
         )
 
+
+        binding.foundView.adapter=adapter
+
+
+        //LOCATION
+
         val locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager?
         val isGpsEnabled = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        if (!isGpsEnabled) {
+            if (!isGpsEnabled) {
             startActivityForResult(
                 Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),
                 2
             )
         }
 
-        m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        discoverDevices()
 
-//        val locationManager = getSystemService(context.LOCATION_SERVICE) as LocationManager?
-//        val isGpsEnabled = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
-//        if (!isGpsEnabled) {
-//            startActivityForResult(
-//                Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),
-//                MY_REQUEST_CODE
-//            )
-//        }
+        //BT
 
+        val bluetoothManager = context?.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+        val m_bluetoothAdapter = bluetoothManager.getAdapter()
+        val filter = IntentFilter()
+
+        filter.addAction(BluetoothDevice.ACTION_FOUND)
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
+        filter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
 
         binding.textView3.setText(auth.currentUser?.email)
 
@@ -103,7 +108,12 @@ class AfterLoginFragment : Fragment() {
                 val enableBT = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
                 startActivityForResult(enableBT, 1)
             } else {
-            discoverDevices()
+                val toast = Toast.makeText(context, "Please Wait", Toast.LENGTH_LONG)
+                toast.show()
+                Log.println(Log.DEBUG, String(), m_bluetoothAdapter.startDiscovery().toString());
+                activity?.registerReceiver(mReceiver, filter);
+                Log.println(Log.DEBUG, String(), "Something1")
+//            discoverDevices()
 //            search()
             }
         }
@@ -111,20 +121,6 @@ class AfterLoginFragment : Fragment() {
         setHasOptionsMenu(true)
 
         return binding.root
-    }
-
-    private fun search() {
-        m_pairedDevices = m_bluetoothAdapter!!.bondedDevices
-        val list: ArrayList<BluetoothDevice> = ArrayList()
-
-        if (!m_pairedDevices.isEmpty()) {
-            for (device: BluetoothDevice in m_pairedDevices) {
-                list.add(device)
-                Log.println(Log.DEBUG, String(), "" + device)
-            }
-        }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -138,31 +134,38 @@ class AfterLoginFragment : Fragment() {
     }
 
     private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        @SuppressLint("MissingPermission")
         override fun onReceive(context: Context, intent: Intent) {
-            Log.println(Log.DEBUG, String(), "Carregou aqui")
             val action = intent.action
-            if (BluetoothDevice.ACTION_FOUND == action) {
-                Log.println(Log.DEBUG, String(), "Carregou aqui tbem")
-
-                val device = intent
-                    .getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE)
+            if (BluetoothAdapter.ACTION_DISCOVERY_STARTED == action) {
+                Log.println(Log.DEBUG, String(), "Started")
+                //discovery starts, we can show progress dialog or perform other tasks
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED == action) {
+                Log.println(Log.DEBUG, String(), "Finished")
+                //discovery finishes, dismis progress dialog
+            } else if (BluetoothDevice.ACTION_FOUND == action) {
+                //bluetooth device found
+                val device =
+                    intent.getParcelableExtra<Parcelable>(BluetoothDevice.EXTRA_DEVICE) as BluetoothDevice?
                 if (device != null) {
-                    m_devices.add(device)
-                    Log.println(Log.DEBUG, String(), device.address)
+                    m_devices.add(Device(device.name,device.address))
                 }
-              }
+                adapter.data=m_devices
+
+                Log.println(Log.DEBUG, String(), "Found device " + device!!.name)
+            }
         }
     }
 
-    private fun discoverDevices(){
-//        if (m_bluetoothAdapter!!.isDiscovering) {
-//            // Bluetooth is already in mode discovery mode, we cancel to restart it again
-//            m_bluetoothAdapter!!.cancelDiscovery()
-//        }
-        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
-        activity?.registerReceiver(mReceiver, filter)
-        val bool = m_bluetoothAdapter?.startDiscovery()
-        Log.i("", bool.toString())
+//    private fun discoverDevices(){
+////        if (m_bluetoothAdapter!!.isDiscovering) {
+////            // Bluetooth is already in mode discovery mode, we cancel to restart it again
+////            m_bluetoothAdapter!!.cancelDiscovery()
+////        }
+//        val filter = IntentFilter(BluetoothDevice.ACTION_FOUND)
+//        activity?.registerReceiver(mReceiver, filter)
+//        val bool = m_bluetoothAdapter?.startDiscovery()
+//        Log.i("", bool.toString())
 
     }
 
@@ -172,4 +175,4 @@ class AfterLoginFragment : Fragment() {
 //
 //        }
 //    }
-}
+//}

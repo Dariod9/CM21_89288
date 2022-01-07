@@ -65,11 +65,14 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/foundView"
             android:layout_width="414dp"
             android:layout_height="240dp"
             app:layout_constraintBottom_toTopOf="@+id/searchButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
 
         <ImageView
             android:id="@+id/imageView6"
