@@ -36,6 +36,8 @@ import com.google.firebase.ktx.Firebase
 class LoggedActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
+    private var friend_devices: ArrayList<Device> = ArrayList()
+    private var black_devices: ArrayList<Device> = ArrayList()
     lateinit var auth : FirebaseAuth
     lateinit var navigationView: NavigationView
 
@@ -48,6 +50,8 @@ class LoggedActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
         NavigationUI.setupWithNavController(binding.navView, navController)
         navigationView=findViewById(R.id.navView)
+        black_devices.add(Device("Stalker1", "Endereço"))
+        friend_devices.add(Device("Friend1", "Endereço"))
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -55,9 +59,26 @@ class LoggedActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController, drawerLayout)
     }
 
-    fun setActionBarTitle(title: String?) {
-         supportActionBar?.title =title
+    fun getFriends(): ArrayList<Device> {
+        return friend_devices
     }
+
+    fun addFriend(friend: Device?){
+        if (friend != null) {
+            friend_devices.add(friend)
+        }
+    }
+
+    fun getBlack(): ArrayList<Device> {
+        return friend_devices
+    }
+
+    fun addBlack(friend: Device?){
+        if (friend != null) {
+            black_devices.add(friend)
+        }
+    }
+
 
     fun changeNav(){
         navigationView.menu.clear()
